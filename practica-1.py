@@ -29,7 +29,7 @@ def convertir_a_notacion_polaca_inversa(expresion):
         if simbolo.isdigit():
             expresion_final.append(simbolo)
             pasos.append(
-                "Número " + simbolo + " agregado al final."
+                f"Número {simbolo} agregado al final."
             )
         # Pero si es un operador, entonces
         elif simbolo in ["+", "-", "*", "/", "**"]:
@@ -41,7 +41,7 @@ def convertir_a_notacion_polaca_inversa(expresion):
                 )
             pila.append(simbolo) # Agrega el operador actual a la pila
             pasos.append(
-                "Operador " + simbolo + " agregado."
+                f"Operador {simbolo} agregado."
             )
 
         # En otro caso, si es paréntesis izquierdo, entonces apile el paréntesis a la pila.
@@ -55,13 +55,13 @@ def convertir_a_notacion_polaca_inversa(expresion):
                 operador = pila.pop()
                 expresion_final.append(operador)  # Agrega el operador a la salida
                 pasos.append(
-                    "Operador " + operador + " retirado de la pila y agregado a la salida."
+                    f"Operador {operador} retirado de la pila y agregado a la salida."
                 )
             # Retira el paréntesis izquierdo de la pila, si existe
             if pila and pila[-1] == "(":
                 pila.pop()
                 pasos.append(
-                    "Paréntesis izquierdo '(' encontrado y retirado."
+                    f"Paréntesis izquierdo '(' encontrado y retirado."
                 )
 
     # Mientras haya operadores en la pila, agréguelos a la cadena final.
@@ -69,7 +69,7 @@ def convertir_a_notacion_polaca_inversa(expresion):
         operador = pila.pop()
         expresion_final.append(operador)
         pasos.append(
-            "Operador " + operador + " retirado de la pila y agregado a la salida."
+            f"Operador {operador} retirado de la pila y agregado a la salida."
         )
 
     # Regresar los pasos y la expresión polaca inversa como string
@@ -105,7 +105,7 @@ def guardar_informe(expresion_original, resultado, pasos):
         "Pasos de la conversión:\n"
     )
     for indice in range(len(pasos)): # Itera y agrega los pasos al reporte
-        archivo.write(pasos[indice] + "\n")
+        reporte.write(pasos[indice] + "\n")
     reporte.close()
 
 def ejecutar_programa():
@@ -115,9 +115,11 @@ def ejecutar_programa():
     print("\nConversor de notación 'normal' a notación polaca inversa")
     # Solicitar una expresión aritmética
     expresion = input(
-        """\nEscribe una expresión aritmética. (SEPARA CADA PARTE CON ESPACIOS)
-             Ejemplo: 12 * ( 312 * 23 ) ** 4.\n => """
-        )
+        """
+    Escribe una expresión aritmética. (SEPARA CADA PARTE CON ESPACIOS)
+    Ejemplo: 12 * ( 312 * 23 ) ** 4.
+    => """
+    )
 
     # Llama a el conversor de notacion
     resultado, pasos = convertir_a_notacion_polaca_inversa(expresion)
